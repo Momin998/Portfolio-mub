@@ -310,8 +310,13 @@
     footer{text-align:center;padding:30px;font-family:var(--font-mono);font-size:12px;color:var(--muted);position:relative;z-index:1;}
     .footer-name{background:linear-gradient(135deg,var(--teal),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 
+    /* Add this just BEFORE the @media queries for desktop alignment */
+    .nav-right-container { display: flex; align-items: center; gap: 16px; }
+    .hamburger-btn { display: none; background: transparent; border: none; color: var(--teal); width: 36px; height: 36px; transition: all 0.3s ease; }
+    .hamburger-btn svg { width: 26px; height: 26px; }
+
     /* ========================================================
-       RESPONSIVE LAYOUT FIX (FIX: MOBILE TABS & OVERFLOW)
+       RESPONSIVE LAYOUT FIX (FIX: MOBILE MENU & TABS)
        ======================================================== */
     @media(max-width:1200px){
       .side-left{left:20px;}
@@ -320,12 +325,27 @@
     }
     @media(max-width:768px){
       main{padding:0 28px;}
-      nav{padding:0 28px;}
+      /* Fixed Header background on mobile so it doesn't disappear */
+      nav{padding:0 28px; background: var(--nav-bg); backdrop-filter: blur(20px);} 
       #about .about-grid{grid-template-columns:1fr;}
-      .nav-links a.nav-item{display:none;}
+      
+      /* Mobile Menu Styling */
+      .hamburger-btn { display: flex; align-items: center; justify-content: center; }
+      .theme-toggle-btn { margin-left: 0; }
+      
+      .nav-links {
+        position: fixed; top: 0; right: -100%; width: 75vw; height: 100vh;
+        background: var(--nav-bg); backdrop-filter: blur(20px);
+        flex-direction: column; justify-content: center; align-items: center; gap: 30px;
+        transition: right 0.4s var(--ease); border-left: 1px solid var(--border); z-index: -1;
+      }
+      .nav-links.active { right: 0; }
+      .nav-links a.nav-item { display: block; font-size: 18px; }
+      .resume-btn { margin-left: 0; margin-top: 10px; font-size: 16px; padding: 12px 28px; }
+      
       .side{display:none;}
       
-      /* Mobile Fixes for Experience Section (Horizontal Scrollable Tabs) */
+      /* Mobile Fixes for Experience Section */
       #experience .exp-wrap{flex-direction:column; min-height:auto; gap:24px;}
       .tab-list{width:100%; display:flex; overflow-x:auto; border-bottom:2px solid var(--border); padding-bottom:0;}
       .tab-list::-webkit-scrollbar{height:2px;}
@@ -335,9 +355,9 @@
       .tab-list button.active{border-bottom-color:var(--teal); background:transparent;}
       .tab-panels{padding-left:0;}
       
-      /* Mobile Cursor Fix (Disable custom cursor on touch devices) */
+      /* Mobile Cursor Fix */
       #c-dot, #c-ring{display:none !important;}
-      body, button, a, .project-card, .theme-toggle-btn{cursor:auto !important;}
+      body, button, a, .project-card, .theme-toggle-btn, .hamburger-btn {cursor:auto !important;}
     }
     @media(max-height:700px){
       .side{gap:10px;}
@@ -364,12 +384,15 @@
 
 <nav id="navbar">
   <a href="#hero" class="nav-logo">Mubarra.</a>
-  <div class="nav-links">
-    <a href="#about" class="nav-item">About</a>
-    <a href="#experience" class="nav-item">Experience</a>
-    <a href="#work" class="nav-item">Work</a>
-    <a href="#contact" class="nav-item">Contact</a>
-    <a href="hel.pdf" target="_blank" class="resume-btn">Resume</a>
+  
+  <div class="nav-right-container">
+    <div class="nav-links" id="nav-links">
+      <a href="#about" class="nav-item">About</a>
+      <a href="#experience" class="nav-item">Experience</a>
+      <a href="#work" class="nav-item">Work</a>
+      <a href="#contact" class="nav-item">Contact</a>
+      <a href="hel.pdf" target="_blank" class="resume-btn">Resume</a>
+    </div>
     
     <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
       <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -382,6 +405,14 @@
         <line x1="21" y1="12" x2="23" y2="12"></line>
         <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+
+    <button id="hamburger-menu" class="hamburger-btn" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
       </svg>
     </button>
   </div>
@@ -636,6 +667,28 @@
       if(ti>titleTxt.length){clearInterval(iv);titleEl.textContent=titleTxt;}
     },45);
   },2800);
+
+  // MOBILE MENU LOGIC (NEW)
+  const hamburgerBtn = document.getElementById('hamburger-menu');
+  const navLinksContainer = document.getElementById('nav-links');
+
+  hamburgerBtn.addEventListener('click', () => {
+    navLinksContainer.classList.toggle('active');
+    // Change icon between Hamburger and 'X'
+    if(navLinksContainer.classList.contains('active')) {
+      hamburgerBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+    } else {
+      hamburgerBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+    }
+  });
+
+  // Close menu automatically when a link is clicked
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinksContainer.classList.remove('active');
+      hamburgerBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+    });
+  });
 </script>
 </body>
 </html>
