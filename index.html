@@ -38,19 +38,18 @@
 
     /* ========================================================
        PREMIUM LIGHT THEME SPECIFIC STYLES
-       (This only activates on Light Mode, Dark Mode is 100% safe)
        ======================================================== */
     body.light-mode {
-      --black:       #fafafa; /* Premium clean off-white background */
+      --black:       #fafafa;
       --deep:        #ffffff;
       --card:        #ffffff;
       --card-hover:  #ffffff;
       
-      --teal:        #0d9488; /* Deep Ocean Teal for readability */
+      --teal:        #0d9488;
       --purple:      #6366f1;
       --rose:        #e11d48;
-      --ice:         #0f172a; /* Slate 900 for dark text */
-      --muted:       #475569; /* Slate 600 for paragraphs */
+      --ice:         #0f172a;
+      --muted:       #475569;
       --border:      rgba(0,0,0,0.08);
       
       --teal-rgb:    13, 148, 136;
@@ -67,14 +66,12 @@
     body.light-mode #c-ring.hovered { border-color: var(--teal); background: rgba(var(--teal-rgb), 0.08); }
     body.light-mode nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.04); }
 
-    /* FIX: Removes the Solid White Box error on hover in Light Mode */
     body.light-mode .project-card::before,
     body.light-mode .project-card::after,
     body.light-mode .project-glow {
       display: none !important; 
     }
     
-    /* Adds Premium Clean Drop-Shadows for Cards in Light Mode */
     body.light-mode .project-card {
       background: #ffffff;
       border: 1px solid rgba(0,0,0,0.06);
@@ -83,29 +80,20 @@
     body.light-mode .project-card:hover {
       background: #ffffff;
       border-color: rgba(13, 148, 136, 0.3);
-      box-shadow: 0 20px 40px rgba(13, 148, 136, 0.12); /* Soft professional glow */
+      box-shadow: 0 20px 40px rgba(13, 148, 136, 0.12);
       transform: translateY(-10px) rotateX(2deg);
     }
 
-    /* Fixes Ghost Buttons to look clear in Light Mode */
-    body.light-mode .btn-ghost {
-      border-color: rgba(0,0,0,0.15);
-      color: var(--ice) !important;
-    }
-    body.light-mode .btn-ghost:hover {
-      border-color: var(--teal);
-      color: var(--teal) !important;
-      background: rgba(13,148,136,0.05);
-    }
+    body.light-mode .btn-ghost { border-color: rgba(0,0,0,0.15); color: var(--ice) !important; }
+    body.light-mode .btn-ghost:hover { border-color: var(--teal); color: var(--teal) !important; background: rgba(13,148,136,0.05); }
 
-    /* Fixes Profile Picture Shadow in Light Mode */
     body.light-mode .avatar-frame { box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
     body.light-mode .avatar-frame:hover { box-shadow: 0 20px 40px rgba(13,148,136,0.15); }
     body.light-mode .avatar-overlay { background: linear-gradient(135deg, rgba(13,148,136,0.1), transparent 60%); }
 
 
     /* ========================================================
-       BASE STRUCTURE & DARK THEME (100% UNTOUCHED)
+       BASE STRUCTURE & DARK THEME
        ======================================================== */
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
@@ -171,24 +159,12 @@
     .side-left{left:44px;}
     .side-right{right:44px;}
 
-    /* LEFT SIDE ICONS */
-    .side-left a{
-      color:var(--muted);text-decoration:none;
-      display:flex;align-items:center;justify-content:center;
-      width:38px;height:38px;border-radius:8px;
-      transition:all .3s var(--ease);
-      position:relative;
-    }
-    .side-left a::before{
-      content:'';position:absolute;inset:0;border-radius:8px;
-      background:var(--glow-teal);opacity:0;
-      transition:opacity .3s var(--ease);
-    }
+    .side-left a{color:var(--muted);text-decoration:none;display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:8px;transition:all .3s var(--ease);position:relative;}
+    .side-left a::before{content:'';position:absolute;inset:0;border-radius:8px;background:var(--glow-teal);opacity:0;transition:opacity .3s var(--ease);}
     .side-left a:hover{color:var(--teal);transform:translateY(-5px);filter:drop-shadow(0 0 10px var(--teal));}
     .side-left a:hover::before{opacity:1;}
     .side-left svg{width:20px;height:20px;fill:currentColor;position:relative;z-index:1;}
 
-    /* RIGHT SIDE EMAIL */
     .side-right a{writing-mode:vertical-rl;color:var(--muted);font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-decoration:none;transition:all .3s var(--ease);}
     .side-right a:hover{color:var(--teal);transform:translateY(-5px);}
 
@@ -210,14 +186,7 @@
       letter-spacing:-2px;
       opacity:0;
       animation:riseUp .7s var(--ease) 2.2s forwards;
-      background:linear-gradient(
-        90deg,
-        var(--ice) 0%,
-        var(--teal) 25%,
-        var(--purple) 50%,
-        var(--rose) 75%,
-        var(--ice) 100%
-      );
+      background:linear-gradient(90deg, var(--ice) 0%, var(--teal) 25%, var(--purple) 50%, var(--rose) 75%, var(--ice) 100%);
       background-size:300% auto;
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
@@ -225,10 +194,7 @@
       animation:riseUp .7s var(--ease) 2.2s forwards, nameShimmer 4s linear 2.9s infinite;
       transition:background 0.5s;
     }
-    @keyframes nameShimmer{
-      0%{background-position:0% center;}
-      100%{background-position:300% center;}
-    }
+    @keyframes nameShimmer{0%{background-position:0% center;}100%{background-position:300% center;}}
 
     .hero-title{font-family:var(--font-display);font-size:clamp(28px,5vw,48px);font-weight:700;line-height:1.1;letter-spacing:-1px;margin-top:8px;background:linear-gradient(135deg,var(--teal) 0%,var(--purple) 60%,var(--rose) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 200%;opacity:0;animation:riseUp .7s var(--ease) 2.4s forwards,gradShift 5s ease infinite;}
     @keyframes gradShift{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
@@ -265,21 +231,11 @@
 
     /* PHOTO */
     .avatar-wrap{position:relative;max-width:290px;}
-    .avatar-frame{
-      position:relative;border-radius:14px;overflow:hidden;
-      background:linear-gradient(135deg,var(--teal),var(--purple),var(--rose));
-      padding:2.5px;
-      transition:all .4s var(--ease);
-    }
+    .avatar-frame{position:relative;border-radius:14px;overflow:hidden;background:linear-gradient(135deg,var(--teal),var(--purple),var(--rose));padding:2.5px;transition:all .4s var(--ease);}
     .avatar-frame:hover{box-shadow:0 0 50px rgba(var(--teal-rgb),0.3),0 0 80px rgba(var(--purple-rgb),0.2);}
     .avatar-inner{border-radius:12px;overflow:hidden;display:block;width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top center;filter:grayscale(20%) contrast(1.05);transition:filter .4s var(--ease);}
     .avatar-frame:hover .avatar-inner{filter:none;}
-    .avatar-overlay{
-      position:absolute;inset:2.5px;border-radius:12px;
-      background:linear-gradient(135deg,rgba(var(--teal-rgb),0.15),transparent 60%);
-      pointer-events:none;
-      transition:opacity .4s;
-    }
+    .avatar-overlay{position:absolute;inset:2.5px;border-radius:12px;background:linear-gradient(135deg,rgba(var(--teal-rgb),0.15),transparent 60%);pointer-events:none;transition:opacity .4s;}
     .avatar-frame:hover .avatar-overlay{opacity:0;}
     .avatar-wrap::after{content:'';position:absolute;width:100%;height:100%;border:1px solid rgba(var(--teal-rgb),0.3);border-radius:16px;top:14px;left:14px;z-index:-1;transition:all .3s var(--ease);}
     .avatar-wrap:hover::after{top:8px;left:8px;border-color:var(--teal);}
@@ -318,17 +274,18 @@
       cursor:none;
       transform-style:preserve-3d;
     }
-    .project-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(var(--teal-rgb),0.06),rgba(var(--purple-rgb),0.06));opacity:0;transition:opacity .4s;}
-    .project-card::after{content:'';position:absolute;inset:0;border-radius:14px;border:1px solid transparent;background:linear-gradient(var(--black),var(--black)) padding-box,linear-gradient(135deg,var(--teal),var(--purple)) border-box;opacity:0;transition:opacity .4s;}
+    
+    /* FIX: Card Black Box Issue on Hover */
+    .project-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(var(--teal-rgb),0.06),rgba(var(--purple-rgb),0.06));opacity:0;transition:opacity .4s; pointer-events:none;}
+    .project-card::after{content:'';position:absolute;inset:0;border-radius:14px;border:1px solid transparent;background:linear-gradient(var(--black),var(--black)) padding-box,linear-gradient(135deg,var(--teal),var(--purple)) border-box;opacity:0;transition:opacity .4s; pointer-events:none;}
+    .project-card > * { position: relative; z-index: 2; pointer-events: auto; } /* Keeps text always on top of background layers */
+    
     .project-card:hover{transform:translateY(-10px) rotateX(2deg);background:var(--card-hover);}
     .project-card:hover::before{opacity:1;}
     .project-card:hover::after{opacity:1;}
     .project-card:hover .project-glow{opacity:1;}
-    .project-glow{
-      position:absolute;width:200px;height:200px;border-radius:50%;
-      background:radial-gradient(circle,rgba(var(--teal-rgb),0.12),transparent 70%);
-      top:-60px;right:-60px;opacity:0;transition:opacity .4s;pointer-events:none;
-    }
+    
+    .project-glow{position:absolute;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(var(--teal-rgb),0.12),transparent 70%);top:-60px;right:-60px;opacity:0;transition:opacity .4s;pointer-events:none;}
     .project-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;}
     .folder-icon{color:var(--teal);}
     .folder-icon svg{width:38px;height:38px;stroke:currentColor;fill:none;stroke-width:1.5;}
@@ -353,7 +310,9 @@
     footer{text-align:center;padding:30px;font-family:var(--font-mono);font-size:12px;color:var(--muted);position:relative;z-index:1;}
     .footer-name{background:linear-gradient(135deg,var(--teal),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 
-    /* RESPONSIVE LAYOUT FIX */
+    /* ========================================================
+       RESPONSIVE LAYOUT FIX (FIX: MOBILE TABS & OVERFLOW)
+       ======================================================== */
     @media(max-width:1200px){
       .side-left{left:20px;}
       .side-right{right:20px;}
@@ -365,6 +324,20 @@
       #about .about-grid{grid-template-columns:1fr;}
       .nav-links a.nav-item{display:none;}
       .side{display:none;}
+      
+      /* Mobile Fixes for Experience Section (Horizontal Scrollable Tabs) */
+      #experience .exp-wrap{flex-direction:column; min-height:auto; gap:24px;}
+      .tab-list{width:100%; display:flex; overflow-x:auto; border-bottom:2px solid var(--border); padding-bottom:0;}
+      .tab-list::-webkit-scrollbar{height:2px;}
+      .tab-list::-webkit-scrollbar-thumb{background:var(--teal);border-radius:2px;}
+      .tab-list::before, .tab-indicator{display:none !important;}
+      .tab-list button{width:auto; flex-shrink:0; border-bottom:2px solid transparent; padding:0 20px;}
+      .tab-list button.active{border-bottom-color:var(--teal); background:transparent;}
+      .tab-panels{padding-left:0;}
+      
+      /* Mobile Cursor Fix (Disable custom cursor on touch devices) */
+      #c-dot, #c-ring{display:none !important;}
+      body, button, a, .project-card, .theme-toggle-btn{cursor:auto !important;}
     }
     @media(max-height:700px){
       .side{gap:10px;}
@@ -471,7 +444,7 @@
       <div>
         <div class="avatar-wrap">
           <div class="avatar-frame">
-            <img class="avatar-inner" src="kode.jpeg" alt="mubarra"/>
+            <img class="avatar-inner" src="girl.png" alt="mubarra"/>
             <div class="avatar-overlay"></div>
           </div>
         </div>
@@ -592,10 +565,8 @@
   themeBtn.addEventListener('click', () => {
     document.body.classList.toggle('light-mode');
     if(document.body.classList.contains('light-mode')) {
-      // Moon Icon (Light Mode active)
       themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
     } else {
-      // Sun Icon (Dark Mode active)
       themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
     }
   });
